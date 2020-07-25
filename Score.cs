@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Pong {
-
-    class Score {
-
+namespace Pong
+{
+    class Score
+    {
         private int playerScore = 0;
         private int cpuScore = 0;
         private readonly SpriteFont font;
@@ -26,7 +26,8 @@ namespace Pong {
             this.playerScore++;
         }
 
-        public void IncrementCpuScore() {
+        public void IncrementCpuScore()
+        {
             this.cpuScore++;
         }
 
@@ -56,7 +57,8 @@ namespace Pong {
             return this.playerScore >= ScoreToWin;
         }
 
-        public Boolean CpuWin() {
+        public Boolean CpuWin()
+        {
             return this.cpuScore >= ScoreToWin;
         }
     }

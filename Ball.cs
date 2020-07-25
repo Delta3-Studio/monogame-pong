@@ -2,12 +2,10 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Pong {
-
-
+namespace Pong
+{
     class Ball
     {
-
         private readonly SoundEffect soundEffect;
 
         private const int BarHeight = 80;
@@ -40,15 +38,19 @@ namespace Pong {
 
         }
 
-        public void IncreasetHorizontalMovement() {
-            if (Math.Abs(horizontalMovement) > 10) {
+        public void IncreasetHorizontalMovement()
+        {
+            if (Math.Abs(horizontalMovement) > 10)
+            {
                 return;
             }
 
-            if (horizontalMovement > 0) {
+            if (horizontalMovement > 0)
+            {
                 horizontalMovement = horizontalMovement + 1;
             }
-            else {
+            else
+            {
                 horizontalMovement = horizontalMovement - 1;
             }
         }
@@ -80,7 +82,8 @@ namespace Pong {
             MoveHorizontally();
         }
 
-        public void MoveToCenter() {
+        public void MoveToCenter()
+        {
             xPosition = this.yPosition = worldHeight / 2;
             BounceHorizontal();
             verticalMovement = 0;
@@ -93,7 +96,7 @@ namespace Pong {
                 BounceHorizontal();
             }
 
-           xPosition = xPosition + horizontalMovement;
+            xPosition = xPosition + horizontalMovement;
         }
 
         private void MoveVertically()
@@ -103,14 +106,14 @@ namespace Pong {
                 BounceVertical();
                 PlayEdgeSound();
             }
-  
+
 
             yPosition = yPosition + verticalMovement;
         }
 
         public void CheckHit(Bar playerBar, Bar cpuBar)
         {
-            if(IsCollision(playerBar))
+            if (IsCollision(playerBar))
             {
                 Swing(playerBar);
                 BounceHorizontal();
@@ -120,7 +123,8 @@ namespace Pong {
 
             }
 
-            if(IsCollision(cpuBar)) {
+            if (IsCollision(cpuBar))
+            {
                 Swing(cpuBar);
                 BounceHorizontal();
                 cpuBar.PlaySound();
@@ -135,7 +139,8 @@ namespace Pong {
             IncreasetHorizontalMovement();
         }
 
-        private void PlayEdgeSound() {
+        private void PlayEdgeSound()
+        {
             soundEffect.Play();
         }
 
@@ -159,7 +164,8 @@ namespace Pong {
             return off;
         }
 
-        public Boolean IsYcollision(Bar bar) {
+        public Boolean IsYcollision(Bar bar)
+        {
             return yPosition < bar.GetYposition() + BarHeight && yPosition > bar.GetYposition();
         }
 
@@ -169,7 +175,8 @@ namespace Pong {
             verticalMovement = verticalMovement * -1;
         }
 
-        private void BounceHorizontal() {
+        private void BounceHorizontal()
+        {
             horizontalMovement = horizontalMovement * -1;
         }
 
