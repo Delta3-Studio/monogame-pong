@@ -1,15 +1,8 @@
-﻿#region Using Statements
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using System;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-#endregion
 
-
-namespace Pong {
+namespace Pong
+{
     class BallOutMananger
     {
 
@@ -35,15 +28,16 @@ namespace Pong {
 
         public void Move()
         {
-            ball.Move();   
+            ball.Move();
         }
 
         public void ResetBallAfterLatency()
         {
-            if (latchDelay == 1) {
+            if (latchDelay == 1)
+            {
                 ball.MoveToCenter();
             }
-            else 
+            else
             {
                 PlayBallOutSound();
                 initDelay();
@@ -58,7 +52,6 @@ namespace Pong {
             {
                 latchDelay = ResetBallLatencyInFrames;
             }
-            
         }
 
         public Boolean IsBallOut()
@@ -101,27 +94,24 @@ namespace Pong {
         private Boolean IsOutLeft()
         {
             return ball.GetXposition() < LeftAndRightPadding;
-
         }
 
         private void PlayBallOutSound()
         {
-            if (latchDelay == 60 -1)
+            if (latchDelay == 60 - 1)
             {
                 soundEffect.Play();
             }
-            
         }
 
         private void PlayBallBackInSound()
         {
-            
+
         }
 
         public Ball GetBall()
         {
             return ball;
         }
-
     }
 }

@@ -1,11 +1,10 @@
-﻿using System.Runtime.InteropServices;
-using Microsoft.Xna.Framework.Audio;
+﻿using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Pong {
-    class Bar {
-
-
+namespace Pong
+{
+    class Bar
+    {
         private readonly SoundEffect soundEffect;
         private readonly Texture2D barTexture;
 
@@ -28,14 +27,15 @@ namespace Pong {
             this.worldHeight = worldHeight;
             barTexture = texture;
             this.xPosition = xPosition - Width / 2;
-            this.yPosition = worldHeight/2 - Height/2;
+            this.yPosition = worldHeight / 2 - Height / 2;
 
             this.previousYposition = this.yPosition;
         }
 
         public void IncreaseMovementSpeed()
         {
-            if (movementLength > MaxMovementLength) {
+            if (movementLength > MaxMovementLength)
+            {
                 // Set some limit
                 return;
             }
@@ -57,16 +57,18 @@ namespace Pong {
             return yPosition;
         }
 
-        public void MoveUp() {
+        public void MoveUp()
+        {
             previousYposition = yPosition;
             if (yPosition > 0)
             {
                 yPosition = yPosition - movementLength;
             }
-            
+
         }
 
-        public void MoveDown() {
+        public void MoveDown()
+        {
             previousYposition = yPosition;
             if (yPosition < worldHeight - Height)
             {
@@ -74,7 +76,8 @@ namespace Pong {
             }
         }
 
-        public Texture2D GetTexture() {
+        public Texture2D GetTexture()
+        {
             return barTexture;
         }
 
@@ -85,10 +88,11 @@ namespace Pong {
 
         public int YCenterOfBar()
         {
-            return yPosition + Height/2;
+            return yPosition + Height / 2;
         }
 
-        public void PlaySound() {
+        public void PlaySound()
+        {
             soundEffect.Play();
         }
     }

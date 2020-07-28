@@ -1,17 +1,16 @@
-﻿#region Using Statements
-using System;
+﻿using System;
 using System.Globalization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-#endregion
 
-namespace Pong {
-
-    public class Game1 : Game {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+namespace Pong
+{
+    public class Game1 : Game
+    {
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
 
         private const int Height = 600;
         private const int Width = 800;
@@ -25,7 +24,7 @@ namespace Pong {
         private CpuController cpuController;
         private Score score;
 
-        public Game1(): base() 
+        public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -35,21 +34,13 @@ namespace Pong {
             graphics.PreferredBackBufferWidth = Width;
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
-        protected override void Initialize() {
+        protected override void Initialize()
+        {
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
-        protected override void LoadContent() {
+        protected override void LoadContent()
+        {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -80,27 +71,16 @@ namespace Pong {
 
         }
 
-
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
-        protected override void UnloadContent() {
-            // TODO: Unload any non ContentManager content
-        }
-
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Update(GameTime gameTime) {
+        protected override void Update(GameTime gameTime)
+        {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
 
-            if (score.IsGameFinished()) {
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Enter)) {
+            if (score.IsGameFinished())
+            {
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Enter))
+                {
                     score.Reset();
                     playerBar.ResetHorizontalMovementSpeed();
                     cpuBar.ResetHorizontalMovementSpeed();
@@ -117,20 +97,21 @@ namespace Pong {
 
             if (keyboardState.IsKeyDown(Keys.Down) || gamePadState.DPad.Down == ButtonState.Pressed)
             {
-               playerBar.MoveDown();
+                playerBar.MoveDown();
             }
 
-            if (ballOutManager.IsBallOut()) {
+            if (ballOutManager.IsBallOut())
+            {
                 ballOutManager.ResetBallAfterLatency();
                 ballOutManager.GetBall().ResetHorizontalMovement();
                 playerBar.ResetHorizontalMovementSpeed();
                 cpuBar.ResetHorizontalMovementSpeed();
             }
-            else 
+            else
             {
                 ballOutManager.Move();
                 ballOutManager.GetBall().CheckHit(playerBar, cpuBar);
-                cpuController.UpdatePosition(); 
+                cpuController.UpdatePosition();
             }
             base.Update(gameTime);
         }
@@ -150,11 +131,8 @@ namespace Pong {
             spriteBatch.DrawString(score.GetFont(), message, new Vector2(40, Height / 2), Color.White, 0f, new Vector2(0, 0), new Vector2(3, 3), SpriteEffects.None, 0f);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime) {
+        protected override void Draw(GameTime gameTime)
+        {
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();

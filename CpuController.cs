@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Pong {
+namespace Pong
+{
     class CpuController
     {
-
         private readonly Bar cpuBar;
         private readonly Ball ball;
         private readonly int worldHeight;
@@ -30,11 +27,10 @@ namespace Pong {
 
         public void MoveCloseToBall()
         {
-            if (Math.Abs(ball.GetYposition() - cpuBar.YCenterOfBar()) > ProximityTolerance) ;
+            if (Math.Abs(ball.GetYposition() - cpuBar.YCenterOfBar()) > ProximityTolerance)
             {
                 MoveCloserTo(ball.GetYposition());
             }
-     
         }
 
         private void AdjustToCenter()
@@ -47,7 +43,7 @@ namespace Pong {
 
         private void MoveCloserTo(int point)
         {
-            var middleOfBar = cpuBar.GetYposition() + BarHeight/2;
+            var middleOfBar = cpuBar.GetYposition() + BarHeight / 2;
             if (middleOfBar < point)
             {
                 cpuBar.MoveDown();
@@ -57,7 +53,5 @@ namespace Pong {
                 cpuBar.MoveUp(); ;
             }
         }
-
-
     }
 }
