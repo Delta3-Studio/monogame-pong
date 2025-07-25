@@ -1,57 +1,44 @@
-﻿using System;
+﻿namespace Pong;
 
-namespace Pong
+class CpuController(Bar cpuBar, Ball ball, int worldHeight)
 {
-    class CpuController
+    const int MovementLength = 5;
+
+    const int BarHeight = 80;
+
+    const int ProximityTolerance = 3;
+
+    public void UpdatePosition()
     {
-        private readonly Bar cpuBar;
-        private readonly Ball ball;
-        private readonly int worldHeight;
-        private const int MovementLength = 5;
+        MoveCloseToBall();
+    }
 
-        private const int BarHeight = 80;
-
-        private const int ProximityTolerance = 3;
-
-        public CpuController(Bar cpuBar, Ball ball, int worldHeight)
+    public void MoveCloseToBall()
+    {
+        if (Math.Abs(ball.GetPositionY() - cpuBar.YCenterOfBar()) > ProximityTolerance)
         {
-            this.cpuBar = cpuBar;
-            this.ball = ball;
-            this.worldHeight = worldHeight;
+            MoveCloserTo(ball.GetPositionY());
         }
+    }
 
-        public void UpdatePosition()
+    void AdjustToCenter()
+    {
+        if (!ball.IsGoingRight())
         {
-            MoveCloseToBall();
+            MoveCloserTo(worldHeight / 2);
         }
+    }
 
-        public void MoveCloseToBall()
+    void MoveCloserTo(int point)
+    {
+        var middleOfBar = cpuBar.GetPositionY() + BarHeight / 2;
+        if (middleOfBar < point)
         {
-            if (Math.Abs(ball.GetYposition() - cpuBar.YCenterOfBar()) > ProximityTolerance)
-            {
-                MoveCloserTo(ball.GetYposition());
-            }
+            cpuBar.MoveDown();
         }
-
-        private void AdjustToCenter()
+        if (middleOfBar > point)
         {
-            if (!ball.IsGoingRight())
-            {
-                MoveCloserTo(worldHeight / 2);
-            }
-        }
-
-        private void MoveCloserTo(int point)
-        {
-            var middleOfBar = cpuBar.GetYposition() + BarHeight / 2;
-            if (middleOfBar < point)
-            {
-                cpuBar.MoveDown();
-            }
-            if (middleOfBar > point)
-            {
-                cpuBar.MoveUp(); ;
-            }
+            cpuBar.MoveUp(); ;
         }
     }
 }
